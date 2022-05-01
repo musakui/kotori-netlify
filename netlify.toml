@@ -1,0 +1,39 @@
+[template.environment]
+  AP_PRIVATE_KEY = "private key for signing requests"
+  ADMIN_USERNAME = "username for admin account (default: admin)"
+
+[functions]
+  directory = "functions"
+  node_bundler = "esbuild"
+
+[build]
+  publish = "dist"
+  command = "rm -rf dist/ && cp -r public dist && node src/build.js"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "*"
+    Access-Control-Allow-Headers = "DNT,User-Agent,Content-Type,Cache-Control"
+
+[[headers]]
+  for = "/u/*"
+  [headers.values]
+    Content-Type = "application/activity+json"
+
+[[headers]]
+  for = "/.well-known/webfinger"
+  [headers.values]
+    Content-Type = "application/jrd+json"
+
+[[redirects]]
+  from = "/.well-known/webfinger"
+  to = "/webfinger/:rs"
+  status = 200
+  query = { resource = ":rs" }
+
+[[redirects]]
+  from = "/inbox"
+  to = "/.netlify/functions/inbox"
+  status = 200

@@ -1,0 +1,21 @@
+{
+  "name": "ActivityPub-inbox",
+  "description": "ActivityPub inbox using serverless functions",
+  "author": "musakui",
+  "license": "MIT",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "deploy": "netlify deploy",
+    "build": "netlify build",
+    "dev": "netlify dev",
+    "ntl": "netlify"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.4"
+  },
+  "devDependencies": {
+    "netlify-cli": "^10.1.0"
+  }
+}
