@@ -1,4 +1,4 @@
-import { createPublicKey } from 'crypto'
+import { Keys } from '@musakui/fedi'
 import { mkdir, writeFile } from 'fs/promises'
 
 const publishDir = 'dist'
@@ -8,10 +8,9 @@ const userDir = `${publishDir}/u`
 const username = process.env.ADMIN_USERNAME || 'admin'
 const { origin, hostname } = new URL(process.env.URL)
 
-const privateKey = `-----BEGIN RSA PRIVATE KEY-----
+const publicKeyPem = Keys.fromPrivate(`-----BEGIN RSA PRIVATE KEY-----
 ${process.env.AP_PRIVATE_KEY}
------END RSA PRIVATE KEY-----`
-const pubKey = createPublicKey({ format: 'pem', key: privateKey })
+-----END RSA PRIVATE KEY-----`)
 
 const actor = {
   id: `${origin}/u/${username}`,
@@ -46,6 +45,6 @@ await writeFile(`${userDir}/${username}`, JSON.stringify({
   publicKey: {
     id: `${actor.id}#main-key`,
     owner: actor.id,
-    publicKeyPem: pubKey.export({ format: 'pem', type: 'spki' }),
+    publicKeyPem,
   },
 }))

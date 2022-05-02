@@ -1,12 +1,12 @@
 import fetch from 'node-fetch'
-import * as AP from '../src/ap.js'
+import * as HS from '@musakui/fedi/hs'
 import { handlePayload } from '../src/handler.js'
 
-const username = process.env.ADMIN_USERNAME || 'admin'
+const admin = process.env.ADMIN_USERNAME || 'admin'
 const { origin } = new URL(process.env.URL)
 
-AP.useFetch(fetch)
-AP.useKey(`${origin}/u/${username}#main-key`, `-----BEGIN RSA PRIVATE KEY-----
+HS.useFetch(fetch)
+HS.useKey(`${origin}/u/${admin}#main-key`, `-----BEGIN RSA PRIVATE KEY-----
 ${process.env.AP_PRIVATE_KEY}
 -----END RSA PRIVATE KEY-----`)
 
@@ -32,10 +32,13 @@ export const handler = async (evt, ctx) => {
   }
 
   try {
-    const target = `${method} ${evt.path}`.toLowerCase()
-    const sender = await AP.verifySignedRequest(evt.headers, evt.body, target)
-    const { '@context': _, ...payload } = JSON.parse(evt.body)
-    await handlePayload(payload, sender)
+    const sender = await HS.verifyRequest({
+      method,
+      path: evt.path,
+      body: evt.body,
+      headers: evt.headers,
+    })
+    await handlePayload(JSON.parse(evt.body), sender)
   } catch (err) {
     console.log(evt.body)
     console.log(evt.headers)

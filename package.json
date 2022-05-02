@@ -13,6 +13,7 @@
     "ntl": "netlify"
   },
   "dependencies": {
+    "@musakui/fedi": "^0.0.0",
     "node-fetch": "^3.2.4"
   },
   "devDependencies": {
