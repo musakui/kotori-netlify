@@ -4,7 +4,7 @@
   "author": "musakui",
   "license": "MIT",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "deploy": "netlify deploy",
@@ -13,10 +13,10 @@
     "ntl": "netlify"
   },
   "dependencies": {
-    "@musakui/fedi": "^0.0.0",
+    "@musakui/fedi": "^0.0.2",
     "node-fetch": "^3.2.4"
   },
   "devDependencies": {
-    "netlify-cli": "^10.1.0"
+    "netlify-cli": "^10.3.1"
   }
 }
