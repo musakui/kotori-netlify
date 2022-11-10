@@ -1,22 +1,24 @@
 {
-  "name": "ActivityPub-inbox",
-  "description": "ActivityPub inbox using serverless functions",
-  "author": "musakui",
-  "license": "MIT",
-  "private": true,
-  "version": "0.0.2",
-  "type": "module",
-  "scripts": {
-    "deploy": "netlify deploy",
-    "build": "netlify build",
-    "dev": "netlify dev",
-    "ntl": "netlify"
-  },
-  "dependencies": {
-    "@musakui/fedi": "^0.0.2",
-    "node-fetch": "^3.2.4"
-  },
-  "devDependencies": {
-    "netlify-cli": "^10.3.1"
-  }
+	"name": "kotori-netlify-firebase",
+	"description": "minimal ActivityPub instance",
+	"author": "musakui",
+	"license": "MIT",
+	"private": true,
+	"repository": "github:musakui/kotori-netlify-firebase",
+	"version": "0.0.3",
+	"type": "module",
+	"scripts": {
+		"ntl:dev": "netlify dev",
+		"ntl:build": "netlify build",
+		"deploy": "netlify deploy",
+		"build": "vite build",
+		"dev": "vite"
+	},
+	"dependencies": {
+		"node-fetch": "^3.2.10"
+	},
+	"devDependencies": {
+		"netlify-cli": "^12.1.0",
+		"vite": "^3.2.3"
+	}
 }

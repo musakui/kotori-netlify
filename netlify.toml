@@ -1,14 +1,12 @@
 [template.environment]
-  AP_PRIVATE_KEY = "private key for signing requests"
+  AP_PRIVATE_KEY = "ActivityPub private key"
   ADMIN_USERNAME = "username for admin account (default: admin)"
 
 [functions]
-  directory = "functions"
   node_bundler = "esbuild"
 
 [build]
   publish = "dist"
-  command = "rm -rf dist/ && cp -r public dist && node src/build.js"
 
 [[headers]]
   for = "/*"
@@ -29,7 +27,7 @@
 
 [[redirects]]
   from = "/.well-known/webfinger"
-  to = "/webfinger/:rs"
+  to = "/.well-known/webfinger/:rs"
   status = 200
   query = { resource = ":rs" }
 
