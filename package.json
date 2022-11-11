@@ -1,10 +1,10 @@
 {
-	"name": "kotori-netlify-firebase",
+	"name": "kotori-netlify",
 	"description": "minimal ActivityPub instance",
 	"author": "musakui",
 	"license": "MIT",
 	"private": true,
-	"repository": "github:musakui/kotori-netlify-firebase",
+	"repository": "github:musakui/kotori-netlify",
 	"version": "0.0.3",
 	"type": "module",
 	"scripts": {

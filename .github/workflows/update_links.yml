@@ -1,0 +1,23 @@
+name: Update links to repository
+
+on: [push]
+
+permissions: write-all
+
+jobs:
+  update-links:
+    if: ${{ github.repository != 'musakui/kotori-netlify' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: update links
+        run: .github/update_links.sh ${{ github.repository }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          push_options: --force
+          commit_message: "generate from template"
