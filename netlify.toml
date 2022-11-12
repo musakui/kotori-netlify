@@ -1,9 +1,3 @@
-[template.environment]
-  AP_PRIVATE_KEY = "ActivityPub private key"
-  NOTION_TOKEN = "Notion API token"
-  NOTION_DATABASE = "Notion database page ID"
-  ADMIN_USERNAME = "username for admin account (default: admin)"
-
 [functions]
   node_bundler = "esbuild"
 
@@ -41,4 +35,9 @@
 [[redirects]]
   from = "/inbox"
   to = "/.netlify/functions/inbox"
+  status = 200
+
+[[redirects]]
+  from = "/notion"
+  to = "/.netlify/functions/notion"
   status = 200
