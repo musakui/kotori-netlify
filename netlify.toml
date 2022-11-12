@@ -38,6 +38,6 @@
   status = 200
 
 [[redirects]]
-  from = "/notion"
+  from = "/callback"
   to = "/.netlify/functions/notion"
   status = 200
