@@ -4,8 +4,9 @@ import { toPEM, fromPrivate } from '@musakui/fedi/keys'
 
 const url = process.env.URL
 
-const summary =	`<p>minimal ActivityPub instance.</p>
-<a href="https://github.com/musakui/kotori-netlify">github.com/musakui/kotori-netlify"</a>`
+const summary =	`<p>minimal ActivityPub instance</p>
+<p>learn more: <a href="https://github.com/musakui/kotori-netlify">github.com/musakui/kotori-netlify</a></p>
+`
 
 const admin = {
 	isBot: true,

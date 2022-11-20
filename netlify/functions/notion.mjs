@@ -30,7 +30,7 @@ export const handler = async (evt) => {
 	return {
 		statusCode: 302,
 		headers: {
-			'Location': `https://musakui.github.io/kotori-netlify/?no-query-string#${qs}`,
+			'Location': `https://musakui.github.io/kotori-netlify/?_#${qs}`,
 		},
 	}
 }
