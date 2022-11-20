@@ -16,16 +16,6 @@
     Access-Control-Allow-Methods = "*"
     Access-Control-Allow-Headers = "DNT,User-Agent,Content-Type,Cache-Control"
 
-[[headers]]
-  for = "/u/*"
-  [headers.values]
-    Content-Type = "application/activity+json"
-
-[[headers]]
-  for = "/.well-known/webfinger"
-  [headers.values]
-    Content-Type = "application/jrd+json"
-
 [[redirects]]
   from = "/.well-known/webfinger"
   to = "/.well-known/webfinger/:rs"

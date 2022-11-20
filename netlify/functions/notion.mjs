@@ -5,7 +5,7 @@ export const handler = async (evt) => {
 		return { statusCode: 405, body: 'not allowed' }
 	}
 
-	console.info(evt.queryStringParameters)
+	const { code, state } = evt.queryStringParameters
 
 	const resp = await fetch('https://api.notion.com/v1/oauth/token', {
 		method: 'POST',
@@ -15,12 +15,22 @@ export const handler = async (evt) => {
 		},
 		body: JSON.stringify({
 			grant_type: 'authorization_code',
-			code: evt.queryStringParameters.code,
+			code,
 			redirect_uri: 'https://kotori-notion.netlify.app/callback'
 		}),
 	}).then((r) => r.json())
 
-	console.info(resp)
+	const qs = new URLSearchParams({
+		id: resp.bot_id,
+		page: resp.duplicated_template_id,
+		token: resp.access_token,
+		state,
+	})
 
-	return { statusCode: 200, body: 'ok' }
+	return {
+		statusCode: 302,
+		headers: {
+			'Location': `https://musakui.github.io/kotori-netlify/#${qs}`
+		},
+	}
 }
