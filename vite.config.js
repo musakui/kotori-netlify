@@ -4,12 +4,15 @@ import { toPEM, fromPrivate } from '@musakui/fedi/keys'
 
 const url = process.env.URL
 
+const summary =	`<p>minimal ActivityPub instance.</p>
+<a href="https://github.com/musakui/kotori-netlify">github.com/musakui/kotori-netlify"</a>`
+
 const admin = {
 	isBot: true,
 	manuallyApprovesFollowers: true,
 	url,
 	name: 'kotori on Netlify',
-	summary: 'minimal ActivityPub instance. https://github.com/musakui/kotori-netlify',
+	summary,
 	icon: { type: 'Image', mediaType: 'image/png', url: `${url}/icon.png` },
 	inbox: '/inbox',
 	published: new Date(),

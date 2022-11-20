@@ -22,15 +22,15 @@ export const handler = async (evt) => {
 
 	const qs = new URLSearchParams({
 		id: resp.bot_id,
-		page: resp.duplicated_template_id,
-		token: resp.access_token,
-		state,
+		db: resp.duplicated_template_id,
+		tk: resp.access_token,
+		st: state,
 	})
 
 	return {
 		statusCode: 302,
 		headers: {
-			'Location': `https://musakui.github.io/kotori-netlify/#${qs}`
+			'Location': `https://musakui.github.io/kotori-netlify/?no-query-string#${qs}`,
 		},
 	}
 }
