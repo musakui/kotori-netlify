@@ -1,3 +1,8 @@
+import fetch from 'node-fetch'
+import * as HS from '@musakui/fedi/hs'
+
+HS.useFetch(fetch)
+
 const cors = {
 	'Access-Control-Allow-Origin': '*',
 	'Access-Control-Allow-Methods': 'GET,POST',
@@ -8,6 +13,23 @@ const handleError = (body, statusCode = 400) => ({
 	statusCode,
 	headers: cors,
 	body,
+})
+
+const addPage = (obj, sender) => fetch('https://api.notion.com/v1/pages', {
+	method: 'POST',
+	headers: {
+		'notion-version': '2022-06-28',
+		'content-type': 'application/json',
+		authorization: `Bearer ${process.env.NOTION_TOKEN}`,
+	},
+	body: JSON.stringify({
+		parent: { database_id: process.env.NOTION_DATABASE },
+		properties: {
+			id: { url: obj.id },
+			type: { select: { name: obj.type } },
+			sender: { url: sender },
+		},
+	}),
 })
 
 export const handler = async (evt, ctx) => {
@@ -31,8 +53,8 @@ export const handler = async (evt, ctx) => {
 	}
 
 	try {
-		console.info(method, path, headers)
-		console.info(body)
+		const sender = await HS.verifyRequest({ method, path, headers, body })
+		await addPage(JSON.parse(body), sender.id)
 	} catch (err) {
 		console.warn(err.message)
 		console.info(body)
