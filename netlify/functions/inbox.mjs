@@ -25,12 +25,12 @@ const addPage = (obj, sender) => fetch('https://api.notion.com/v1/pages', {
 	body: JSON.stringify({
 		parent: { database_id: process.env.NOTION_DATABASE },
 		properties: {
-			id: { url: obj.id },
-			type: { select: { name: obj.type } },
+			id: { url: obj?.id },
+			type: { select: { name: obj?.type } },
 			sender: { url: sender },
 		},
 	}),
-})
+}).then((r) => r.json())
 
 export const handler = async (evt, ctx) => {
 	const { httpMethod: method, path, headers, body } = evt
@@ -54,7 +54,8 @@ export const handler = async (evt, ctx) => {
 
 	try {
 		const sender = await HS.verifyRequest({ method, path, headers, body })
-		await addPage(JSON.parse(body), sender.id)
+		console.log(sender, body)
+		console.log(await addPage(JSON.parse(body), sender.id))
 	} catch (err) {
 		console.warn(err.message)
 		console.info(body)
