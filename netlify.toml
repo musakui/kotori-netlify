@@ -1,5 +1,7 @@
 [template.environment]
   AP_PRIVATE_KEY = "ActivityPub private key"
+  NOTION_TOKEN = "Notion API token"
+  NOTION_DATABASE = "Notion database page ID"
   ADMIN_USERNAME = "username for admin account (default: admin)"
 
 [functions]

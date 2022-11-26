@@ -15,11 +15,10 @@
 		"dev": "vite"
 	},
 	"dependencies": {
-		"@musakui/fedi": "^0.0.3",
+		"@musakui/kotori": "^0.0.2",
 		"node-fetch": "^3.2.10"
 	},
 	"devDependencies": {
-		"@musakui/kotori": "^0.0.1",
 		"netlify-cli": "^12.2.0",
 		"vite": "^3.2.4"
 	}

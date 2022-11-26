@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import * as HS from '@musakui/fedi/hs'
+import { HS } from '@musakui/kotori'
 
 HS.useFetch(fetch)
 
@@ -15,6 +15,8 @@ const handleError = (body, statusCode = 400) => ({
 	body,
 })
 
+const txt = (content) => [{ text: { content } }]
+
 const addPage = (obj, sender) => fetch('https://api.notion.com/v1/pages', {
 	method: 'POST',
 	headers: {
@@ -25,10 +27,22 @@ const addPage = (obj, sender) => fetch('https://api.notion.com/v1/pages', {
 	body: JSON.stringify({
 		parent: { database_id: process.env.NOTION_DATABASE },
 		properties: {
-			id: { url: obj?.id },
-			type: { select: { name: obj?.type } },
+			title: { title: txt(obj.type) },
+			id: { url: obj.id },
+			type: { select: { name: obj.type } },
+			actor: { url: obj.actor },
 			sender: { url: sender },
 		},
+		children: [
+			{
+				object: 'block',
+				code: {
+					language: 'json',
+					caption: txt('payload'),
+					rich_text: txt(JSON.stringify(obj, null, 2)),
+				},
+			},
+		],
 	}),
 }).then((r) => r.json())
 
@@ -54,9 +68,12 @@ export const handler = async (evt, ctx) => {
 
 	try {
 		const sender = await HS.verifyRequest({ method, path, headers, body })
-		console.log(sender, body)
+		console.log(body)
 		console.log(await addPage(JSON.parse(body), sender.id))
 	} catch (err) {
+		if (err.code === 'KEY_RETRIEVAL_FAILED' && JSON.parse(body).type === 'Delete') {
+			return { statusCode: 200, body: 'ok' }
+		}
 		console.warn(err.message)
 		console.info(body)
 		console.info(headers)
