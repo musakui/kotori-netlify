@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import { HS } from '@musakui/kotori'
+import * as HS from '@musakui/fedi/hs'
 
 HS.useFetch(fetch)
 
