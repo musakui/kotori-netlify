@@ -12,4 +12,3 @@ done
 mv .github/NEW_README.md README.md
 
 rm -rf .github
-rm -rf docs
