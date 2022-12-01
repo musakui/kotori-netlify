@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 export const handler = async (evt) => {
 	if (evt.httpMethod !== 'GET') {
 		return { statusCode: 405, body: 'not allowed' }
