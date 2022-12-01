@@ -1,14 +1,10 @@
-import { createPublicKey } from 'crypto'
 import { defineConfig } from 'vite'
 import kotori from '@musakui/kotori/plugin'
+import { toPEM, fromPrivate } from '@musakui/fedi/keys'
 
 const admin = process.env.ADMIN_USERNAME || 'admin'
 
-const privateKey = `-----BEGIN PRIVATE KEY-----
-${process.env.AP_PRIVATE_KEY}
------END PRIVATE KEY-----`
-
-const publicKey = createPublicKey({ key: privateKey }).export({ format: 'pem', type: 'spki' })
+const publicKey = fromPrivate(toPEM(process.env.AP_PRIVATE_KEY))
 
 export default defineConfig({
 	plugins: [
@@ -27,4 +23,9 @@ export default defineConfig({
 			}),
 		}),
 	],
+	ssr: {
+		noExternal: [
+			'@musakui/*',
+		],
+	},
 })

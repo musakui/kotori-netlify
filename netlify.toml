@@ -9,6 +9,11 @@
 
 [build]
   publish = "dist"
+  command = "npm run build && npm run build:fn"
+
+[context.production.environment]
+  AWS_LAMBDA_JS_RUNTIME = "nodejs18.x"
+  NODE_NO_WARNINGS = "1"
 
 [[headers]]
   for = "/*"
