@@ -1,10 +1,19 @@
 # kotori (using Netlify)
 
-> minimal [ActivityPub](https://activitypub.rocks/) instance using [Netlify Functions](https://functions.netlify.com/)
+> [kotori](https://github.com/musakui/kotori) running on [Netlify Functions](https://functions.netlify.com/)
 
 ## Quick start
 
-### 1. Generate a private key for ActivityPub
+### 1. (optional) Connect with [Notion](https://notion.so)
+Notion can be used to store your inbox activity.
+
+You may choose to skip this step for now (and configure the environment variables on your own later).
+
+To continue, follow the [Notion App authorization link]().
+This will create a table using a template and generate a token for kotori to update that table.
+You may proceed with the rest of the steps from there.
+
+### 2. Generate a private key
 Use `openssl` or the [generator utility](https://musakui.github.io/kotori-netlify/) to generate a private key
 
 ### 2. Deploy to Netlify
@@ -13,6 +22,3 @@ Use `openssl` or the [generator utility](https://musakui.github.io/kotori-netlif
 ### 3. Configure
 Update the site url and tweak the configuration in your cloned repository
 
-## Further reading
-
-- [How to read ActivityPub](https://tinysubversions.com/notes/reading-activitypub/)
